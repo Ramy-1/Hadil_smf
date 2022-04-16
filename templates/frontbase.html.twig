@@ -12,13 +12,13 @@
 			<link
 			rel="stylesheet" href="{{asset('/front/css/styles-merged.css')}}">
 		{# <link rel="stylesheet" href="front/css/style-merged.css">
-										    <link rel="stylesheet" href="front/css/style.min.css"> #}
+														    <link rel="stylesheet" href="front/css/style.min.css"> #}
 
 		{% endblock %}
 		{# <!--[if lt IE 9]>
-										      <script src="{{asset('/front/js/vendor/html5shiv.min.js')}}"></script>
-										      <script src="{{asset('/front/js/vendor/respond.min.js"></script>
-										    <![endif]--> #}
+														      <script src="{{asset('/front/js/vendor/html5shiv.min.js')}}"></script>
+														      <script src="{{asset('/front/js/vendor/respond.min.js"></script>
+														    <![endif]--> #}
 	</head>
 	<body>
 
@@ -33,7 +33,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="{{asset('/front/index.html')}}" title="uiCookies:FineOak">FineOak</a>
+					<a class="navbar-brand" href="{{path('front_panier',{'id':0}) }}" title="uiCookies:FineOak">FineOak</a>
 				</div>
 
 				<div id="navbar-collapse" class="navbar-collapse collapse">
@@ -42,7 +42,7 @@
 							<a href="#" data-nav-section="welcome">Welcome</a>
 						</li>
 						<li>
-							<a href="#" data-nav-section="specialties">Specialties</a>
+							{# <a href="#" data-nav-section="specialties">Specialties</a> #}
 						</li>
 						<li>
 							<a href="#" data-nav-section="menu">Menu</a>
@@ -54,8 +54,9 @@
 							<a href="#" data-nav-section="events">Events</a>
 						</li>
 						<li>
-							<a href="#" data-nav-section="contact">Panier</a>
+							<a href="{{path('front_panier',{'id':0}) }}">Panier</a>
 						</li>
+
 					</ul>
 				</div>
 			</div>
@@ -144,7 +145,10 @@
 					<div class="col-md-12 text-center probootstrap-animate">
 						<div class="probootstrap-heading">
 							<h2 class="primary-heading">Discover</h2>
-							<h3 class="secondary-heading">{% block title %}Our Menu {% endblock %}</h3>
+							<h3 class="secondary-heading">
+								{% block title %}Our Menu
+								{% endblock %}
+							</h3>
 						</div>
 					</div>
 				</div>

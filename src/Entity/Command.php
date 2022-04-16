@@ -58,6 +58,12 @@ class Command
      */
     private $panier;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Plat::class, inversedBy="commands")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $plat;
+
     public function getId(): ?int
     {
         return $this->id;

@@ -79,6 +79,7 @@ class CommandController extends AbstractController
         $plat = $repository->find($id);
 
         $command->setIdUser(0);
+        $command->setConfirmed(0);
         $command->setPlat($plat);
         $command->setPrix($plat->getPrix());
         $command->setDescription($plat->getDescription());
