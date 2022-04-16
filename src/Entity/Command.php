@@ -31,13 +31,6 @@ class Command
     /**
      * @var int
      *
-     * @ORM\Column(name="id_produit", type="integer", nullable=false)
-     */
-    private $idProduit;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="prix", type="integer", nullable=false)
      */
     private $prix;
@@ -49,27 +42,22 @@ class Command
      */
     private $description;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Panier::class, inversedBy="commands")
-     */
-    private $panier;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $quantity;
+    private $quantity = 1;
 
-    public function getPanier(): ?panier
-    {
-        return $this->panier;
-    }
+    /**
+     * @ORM\OneToOne(targetEntity=Plat::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $plat;
 
-    public function setPanier(?panier $panier): self
-    {
-        $this->panier = $panier;
-
-        return $this;
-    }
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $confirmed;
 
     public function getId(): ?int
     {
@@ -84,18 +72,6 @@ class Command
     public function setIdUser(int $idUser): self
     {
         $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    public function getIdProduit(): ?int
-    {
-        return $this->idProduit;
-    }
-
-    public function setIdProduit(int $idProduit): self
-    {
-        $this->idProduit = $idProduit;
 
         return $this;
     }
@@ -132,6 +108,30 @@ class Command
     public function setQuantity(?int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getPlat(): ?Plat
+    {
+        return $this->plat;
+    }
+
+    public function setPlat(Plat $plat): self
+    {
+        $this->plat = $plat;
+
+        return $this;
+    }
+
+    public function getConfirmed(): ?bool
+    {
+        return $this->confirmed;
+    }
+
+    public function setConfirmed(bool $confirmed): self
+    {
+        $this->confirmed = $confirmed;
 
         return $this;
     }

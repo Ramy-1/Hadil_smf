@@ -79,7 +79,7 @@ class CommandController extends AbstractController
         $plat = $repository->find($id);
 
         $command->setIdUser(0);
-        $command->setIdProduit($plat->getId());
+        $command->setPlat($plat);
         $command->setPrix($plat->getPrix());
         $command->setDescription($plat->getDescription());
 
@@ -89,7 +89,6 @@ class CommandController extends AbstractController
         
         $repository = $this->getDoctrine()->getRepository(Panier::class);
         $panier = $repository->findOneBy(['idUser' => 0]);
-        $command->setPanier($panier);
         $panier->addCommand($command);
         
         $em->persist($command);

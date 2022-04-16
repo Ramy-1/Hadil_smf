@@ -66,7 +66,6 @@ class Panier
     {
         if (!$this->commands->contains($command)) {
             $this->commands[] = $command;
-            $command->setPanier($this);
         }
 
         return $this;
@@ -76,9 +75,9 @@ class Panier
     {
         if ($this->commands->removeElement($command)) {
             // set the owning side to null (unless already changed)
-            if ($command->getPanier() === $this) {
-                $command->setPanier(null);
-            }
+            // if ($command->getPanier() === $this) {
+            //     $command->setPanier(null);
+            // }
         }
 
         return $this;
