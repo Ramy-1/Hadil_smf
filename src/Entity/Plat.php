@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * Plat
  *
- * @ORM\Table(name="nomPlat")
+ * @ORM\Table(name="Plat")
  * @ORM\Entity
  *
  */

@@ -44,6 +44,17 @@ class Panier
      */
     private $date;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Command::class)
+     */
+    private $commands;
+
+
+    public function __construct()
+    {
+        $this->commands = new ArrayCollection();
+    }
+
    
     public function getId(): ?int
     {
@@ -86,5 +97,28 @@ class Panier
         return $this;
     }
 
+    /**
+     * @return Collection<int, Command>
+     */
+    public function getCommands(): Collection
+    {
+        return $this->commands;
+    }
+
+    public function addCommand(Command $command): self
+    {
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+        }
+
+        return $this;
+    }
+
+    public function removeCommand(Command $command): self
+    {
+        $this->commands->removeElement($command);
+
+        return $this;
+    }
 
 }

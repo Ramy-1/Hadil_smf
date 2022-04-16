@@ -53,6 +53,11 @@ class Command
      */
     private $confirmed;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Panier::class, inversedBy="commands")
+     */
+    private $panier;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -126,6 +131,18 @@ class Command
     public function setConfirmed(bool $confirmed): self
     {
         $this->confirmed = $confirmed;
+
+        return $this;
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): self
+    {
+        $this->panier = $panier;
 
         return $this;
     }
