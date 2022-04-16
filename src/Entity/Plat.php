@@ -6,8 +6,14 @@ use App\Repository\PlatRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PlatRepository::class)
+ *
+ * Plat
+ *
+ * @ORM\Table(name="nomPlat")
+ * @ORM\Entity
+ *
  */
+//  @ORM\Entity(repositoryClass=PlatRepository::class)
 class Plat
 {
     /**
@@ -20,7 +26,7 @@ class Plat
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $plat;
+    private $nomPlat;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -37,14 +43,14 @@ class Plat
         return $this->id;
     }
 
-    public function getPlat(): ?string
+    public function getNomPlat(): ?string
     {
-        return $this->plat;
+        return $this->nomPlat;
     }
 
-    public function setPlat(?string $plat): self
+    public function setNpmPlat(?string $nomPlat): self
     {
-        $this->plat = $plat;
+        $this->nomPlat = $nomPlat;
 
         return $this;
     }

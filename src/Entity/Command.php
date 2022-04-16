@@ -49,12 +49,6 @@ class Command
     private $quantity = 1;
 
     /**
-     * @ORM\OneToOne(targetEntity=Plat::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $plat;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $confirmed;
