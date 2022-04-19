@@ -35,30 +35,32 @@
 								</thead>
 								<tbody>
 									{% for c in tab %}
-										<tr>
-											<td>
-												{{ c.id }}
-											</td>
-											<td>
-												{{ c.idUser }}
-											</td>
-											{# <td>{{c.idPanier}} </td> #}
-											<td>
-												{{ c.description }}
-											</td>
-											<td>
-												{{ c.prix }}
-											</td>
-											<td>
-												<a href="{{ path('commandDelete',{'id':c.id}) }}">
-													delete
-												</a>
-											</td>
-										</tr>
+										{% if c.isConfirmed() %}
+											<tr>
+												<td>
+													{{ c.id }}
+												</td>
+												<td>
+													{{ c.idUser }}
+												</td>
+												{# <td>{{c.idPanier}} </td> #}
+												<td>
+													{{ c.description }}
+												</td>
+												<td>
+													{{ c.prix }}
+												</td>
+												<td>
+													<a href="{{ path('commandDelete',{'id':c.id}) }}">
+														delete
+													</a>
+												</td>
+											</tr>
+										{% endif %}
 									{% endfor %}
 								</tbody>
 							</div>
-						</div>
+						</table>
 					</div>
 				</div>
 			</div>

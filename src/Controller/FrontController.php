@@ -45,20 +45,20 @@ class FrontController extends AbstractController
         $command->setPrix($plat->getPrix());
         $command->setDescription($plat->getDescription());
         $command->setConfirmed(0);
-        
+
         $em = $this->getDoctrine()->getManager();
 
-        
-        
+
+
         $repository = $this->getDoctrine()->getRepository(Panier::class);
         $panier = $repository->findOneBy(['idUser' => 0]);
         $panier->addCommand($command);
-        
+
         $em->persist($command);
         $em->flush();
-        return $this->redirectToRoute('front_panier',['id'=>0]);
+        return $this->redirectToRoute('front_panier', ['id' => 0]);
     }
-     /**
+    /**
      * @Route("/panier/{id}", name="front_panier")
      */
     public function panier($id): Response
@@ -72,13 +72,13 @@ class FrontController extends AbstractController
         $total = 0;
         foreach ($tab as $value) {
             $total += $value->getPrix();
-          }
+        }
         return $this->render('front/panier.html.twig', [
             'tab' => $tab,
             'total' => $total,
         ]);
     }
-     /**
+    /**
      * @Route("/confirmer/{id}", name="front_confirmer")
      */
     public function confirmer($id): Response
@@ -89,13 +89,17 @@ class FrontController extends AbstractController
 
         $tab = $panier->getCommands()->toArray();
 
-        $total = 0;
+        $em = $this->getDoctrine()->getManager();
         foreach ($tab as $value) {
-            $total += $value->getPrix();
-          }
-        return $this->render('front/panier.html.twig', [
-            'tab' => $tab,
-            'total' => $total,
-        ]);
+
+            $panier->removeCommand($value);
+            $value->setConfirmed(1);
+            $em->persist($value);
+            $em->flush();
+        }
+        $em->persist($panier);
+        $em->flush();
+        return $this->redirectToRoute('app_front');
+
     }
 }
