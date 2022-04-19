@@ -59,6 +59,29 @@ class FrontController extends AbstractController
         return $this->redirectToRoute('front_panier', ['id' => 0]);
     }
     /**
+     *  @Route("/remove/{id}", name="removePlatPanier")
+     */
+    public function RemovePlat($id, Request $request): Response
+    {
+        $command = new Command();
+
+        $repository = $this->getDoctrine()->getRepository(Command::class);
+        $command = $repository->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+
+
+
+        $repository = $this->getDoctrine()->getRepository(Panier::class);
+        $panier = $repository->findOneBy(['idUser' => 0]);
+        $panier->removeCommand($command);
+
+        $em->persist($panier);
+        $em->remove($command);
+        $em->flush();
+        return $this->redirectToRoute('front_panier', ['id' => 0]);
+    }
+    /**
      * @Route("/panier/{id}", name="front_panier")
      */
     public function panier($id): Response
@@ -100,6 +123,5 @@ class FrontController extends AbstractController
         $em->persist($panier);
         $em->flush();
         return $this->redirectToRoute('app_front');
-
     }
 }

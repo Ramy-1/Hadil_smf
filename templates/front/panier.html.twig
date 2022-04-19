@@ -12,7 +12,7 @@
 				<span class="price">{{o.prix}}</span>
 				<h3>{{o.getPlat().getNomPlat()}}</h3>
 				<p>{{o.description}}</p>
-				<a href="{{path('commandDelete',{'id':o.id})}}">delete du Panier</a>
+				<a href="{{path('removePlatPanier',{'id':o.id})}}">delete du Panier</a>
 			</div>
 		</li>
 	{% endfor %}

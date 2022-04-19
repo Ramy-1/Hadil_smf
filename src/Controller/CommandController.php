@@ -43,6 +43,19 @@ class CommandController extends AbstractController
             'tab' => $tab,
         ]);
     }
+    /**
+     * @Route("/plat/add", name="platAdd")
+     */
+    public function platNew(): Response
+    {
+        $tab = $this->getDoctrine()
+            ->getRepository(Plat::class)
+            ->findAll();
+
+        return $this->render('command/plat.html.twig', [
+            'tab' => $tab,
+        ]);
+    }
 
     /**
      *  @Route("/command/newcommand", name="newcommand")
