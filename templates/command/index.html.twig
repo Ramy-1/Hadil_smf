@@ -15,72 +15,56 @@
 							<p class="card-category">les commands</p>
 						</div>
 						<div class="card-body table-full-width table-responsive">
-							<table class="table table-hover table-striped">
+							<table id="zero_config" class="table table-striped table-bordered">
 								<thead>
-									<th>ID</th>
-									<th>Name User</th>
-									{# <th>Panier</th> #}
-									<th>Produit</th>
-									<th>Prix Unit</th>
+									<tr>
+										<th></th>
+										<th>
+											id
+										</th>
+										<th>
+											name user
+										</th>
+										<th>
+											produit
+										</th>
+										<th>
+											prix unit
+										</th>
+									</tr>
 								</thead>
 								<tbody>
-
 									{% for c in tab %}
-
 										<tr>
-											<td>{{c.id}}</td>
-											<td>{{c.idUser}}</td>
-											{# <td>{{c.idPanier}}</td> #}
-											<td>{{c.description}}</td>
-											<td>{{c.prix}}</td>
 											<td>
-												<a href="{{ path('commandDelete',{'id':c.id}) }}">Delete</a>
+												{{ c.id }}
+											</td>
+											<td>
+												{{ c.idUser }}
+											</td>
+											{# <td>{{c.idPanier}} </td> #}
+											<td>
+												{{ c.description }}
+											</td>
+											<td>
+												{{ c.prix }}
+											</td>
+											<td>
+												<a href="{{ path('commandDelete',{'id':c.id}) }}">
+													delete
+												</a>
 											</td>
 										</tr>
 									{% endfor %}
-
 								</tbody>
-							</tbody>
-						</table>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
-</div>
-<footer class="footer">
-	<div class="container-fluid">
-		<nav>
-			<ul class="footer-menu">
-				<li>
-					<a href="#">
-						Home
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						Company
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						Portfolio
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						Blog
-					</a>
-				</li>
-			</ul>
-			<p class="copyright text-center">
-				©
-				<script>
-					document.write(new Date().getFullYear())
-				</script>
-				<a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-			</p>
-		</nav>
-	</div>
-</footer></div></div>{% endblock %}
+	<script>
+		$("#zero_config").DataTable();
+	</script>
+{% endblock %}
