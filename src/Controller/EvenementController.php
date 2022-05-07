@@ -36,11 +36,11 @@ class EvenementController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get("image")->getData();
-            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
-            $file->move(
-            $this->getParameter('$uploads'),
-            $fileName);
-            $evenement->setImage($fileName);
+            // $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
+            // $file->move(
+            // $this->getParameter('$uploads'),
+            // $fileName);
+            // $evenement->setImage($fileName);
             $evenementRepository->add($evenement);
             return $this->redirectToRoute('app_evenement_index', [], Response::HTTP_SEE_OTHER);
         }
