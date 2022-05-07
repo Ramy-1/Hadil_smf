@@ -18,7 +18,9 @@ class PanierController extends AbstractController
     {
 
         $repository = $this->getDoctrine()->getRepository(Panier::class);
-        $tab = $repository->findAll();
+        $panier = $repository->findOneBy(['idUser' => 0]);
+
+        $tab = $panier->getCommands()->toArray();
         return $this->render('panier/index.html.twig', [
             'tab' => $tab,
         ]);

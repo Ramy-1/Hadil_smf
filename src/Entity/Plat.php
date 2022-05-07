@@ -3,11 +3,19 @@
 namespace App\Entity;
 
 use App\Repository\PlatRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PlatRepository::class)
+ *
+ * Plat
+ *
+ * @ORM\Table(name="Plat")
+ * @ORM\Entity
+ *
  */
+//  @ORM\Entity(repositoryClass=PlatRepository::class)
 class Plat
 {
     /**
@@ -20,7 +28,7 @@ class Plat
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $plat;
+    private $nomPlat;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -32,19 +40,34 @@ class Plat
      */
     private $prix;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Command::class, mappedBy="plat", orphanRemoval=true)
+     */
+    private $commands;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $jaime;
+
+    public function __construct()
+    {
+        $this->commands = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPlat(): ?string
+    public function getNomPlat(): ?string
     {
-        return $this->plat;
+        return $this->nomPlat;
     }
 
-    public function setPlat(?string $plat): self
+    public function setNpmPlat(?string $nomPlat): self
     {
-        $this->plat = $plat;
+        $this->nomPlat = $nomPlat;
 
         return $this;
     }
@@ -69,6 +92,48 @@ class Plat
     public function setPrix(int $prix): self
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Command>
+     */
+    public function getCommands(): Collection
+    {
+        return $this->commands;
+    }
+
+    public function addCommand(Command $command): self
+    {
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+            $command->setPlat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommand(Command $command): self
+    {
+        if ($this->commands->removeElement($command)) {
+            // set the owning side to null (unless already changed)
+            if ($command->getPlat() === $this) {
+                $command->setPlat(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getJaime(): ?int
+    {
+        return $this->jaime;
+    }
+
+    public function setJaime(int $jaime): self
+    {
+        $this->jaime = $jaime;
 
         return $this;
     }

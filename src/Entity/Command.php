@@ -49,15 +49,20 @@ class Command
     private $quantity = 1;
 
     /**
-     * @ORM\OneToOne(targetEntity=Plat::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $plat;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $confirmed;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Panier::class, inversedBy="commands")
+     */
+    private $panier;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Plat::class, inversedBy="commands")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $plat;
 
     public function getId(): ?int
     {
@@ -124,7 +129,7 @@ class Command
         return $this;
     }
 
-    public function getConfirmed(): ?bool
+    public function isConfirmed(): ?bool
     {
         return $this->confirmed;
     }
@@ -132,6 +137,18 @@ class Command
     public function setConfirmed(bool $confirmed): self
     {
         $this->confirmed = $confirmed;
+
+        return $this;
+    }
+
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): self
+    {
+        $this->panier = $panier;
 
         return $this;
     }

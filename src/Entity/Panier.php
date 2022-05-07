@@ -45,44 +45,17 @@ class Panier
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity=Command::class, mappedBy="panier")
+     * @ORM\ManyToMany(targetEntity=Command::class)
      */
     private $commands;
+
 
     public function __construct()
     {
         $this->commands = new ArrayCollection();
     }
 
-    /**
-     * @return Collection<int, Command>
-     */
-    public function getCommands(): Collection
-    {
-        return $this->commands;
-    }
-
-    public function addCommand(Command $command): self
-    {
-        if (!$this->commands->contains($command)) {
-            $this->commands[] = $command;
-        }
-
-        return $this;
-    }
-
-    public function removeCommand(Command $command): self
-    {
-        if ($this->commands->removeElement($command)) {
-            // set the owning side to null (unless already changed)
-            // if ($command->getPanier() === $this) {
-            //     $command->setPanier(null);
-            // }
-        }
-
-        return $this;
-    }
-
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -124,5 +97,28 @@ class Panier
         return $this;
     }
 
+    /**
+     * @return Collection<int, Command>
+     */
+    public function getCommands(): Collection
+    {
+        return $this->commands;
+    }
+
+    public function addCommand(Command $command): self
+    {
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+        }
+
+        return $this;
+    }
+
+    public function removeCommand(Command $command): self
+    {
+        $this->commands->removeElement($command);
+
+        return $this;
+    }
 
 }
