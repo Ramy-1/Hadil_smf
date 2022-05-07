@@ -45,6 +45,11 @@ class Plat
      */
     private $commands;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $jaime;
+
     public function __construct()
     {
         $this->commands = new ArrayCollection();
@@ -117,6 +122,18 @@ class Plat
                 $command->setPlat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getJaime(): ?int
+    {
+        return $this->jaime;
+    }
+
+    public function setJaime(int $jaime): self
+    {
+        $this->jaime = $jaime;
 
         return $this;
     }

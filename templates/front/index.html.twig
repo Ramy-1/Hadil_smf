@@ -11,8 +11,13 @@
 				<span class="price">{{o.prix}}</span>
 				<h3>{{o.nomplat}}</h3>
 				<p>{{o.description}}</p>
-                <a href="{{path('AddPlatToPanier',{'id':o.id})}}">Add to Panier</a>
+				<p>{{o.jaime}}</p>
+				<a href="{{path('front_jaime',{'id':o.id})}}" >
+					<i class="icon-heart icon-4x"></i>
+					<span>J'aime</span>
+				</a>
 			</div>
+		<a href="{{path('AddPlatToPanier',{'id':o.id})}}">Add to Panier</a>
 		</li>
 	{% endfor %}
 {% endblock %}

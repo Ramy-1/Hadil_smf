@@ -124,4 +124,22 @@ class FrontController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('app_front');
     }
+    
+    
+    /**
+     * @Route("/jaime/{id}", name="front_jaime")
+     */
+    public function jaime($id): Response
+    {
+
+        $repository = $this->getDoctrine()->getRepository(Plat::class);
+        $plat = $repository->find($id);
+
+        $plat->setJaime($plat->getJaime()+1); 
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($plat);
+        $em->flush();
+        return $this->redirectToRoute('app_front');
+    }
 }
