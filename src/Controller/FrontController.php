@@ -9,7 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Plat;
 use App\Entity\Panier;
 use App\Entity\Command;
+use App\Entity\Evenement;
 use SebastianBergmann\Environment\Console;
+use App\Repository\EvenementRepository;
+use App\Form\EvenementType;
 
 /**
  * @Route("/frontt")
@@ -24,9 +27,15 @@ class FrontController extends AbstractController
         $tab = $this->getDoctrine()
             ->getRepository(Plat::class)
             ->findAll();
+        $ev = $this->getDoctrine()
+            ->getRepository(Evenement::class)
+            ->findAll();
+        
 
         return $this->render('front/index.html.twig', [
             'tab' => $tab,
+            'evenements' => $ev,
+          
         ]);
     }
 
@@ -124,8 +133,8 @@ class FrontController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('app_front');
     }
-    
-    
+
+
     /**
      * @Route("/jaime/{id}", name="front_jaime")
      */
@@ -135,7 +144,7 @@ class FrontController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Plat::class);
         $plat = $repository->find($id);
 
-        $plat->setJaime($plat->getJaime()+1); 
+        $plat->setJaime($plat->getJaime() + 1);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($plat);
